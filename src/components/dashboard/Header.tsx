@@ -35,6 +35,12 @@ const pageConfigs: Record<string, { num: string; title: string; subtitle: string
     subtitle: "Curated repository of approved copy and video scripts",
     jp: "蔵",
   },
+  "/dashboard/chat": {
+    num: "06",
+    title: "AI Counsel & Strategy",
+    subtitle: "Interactive dialogue, content engineering, and campaign orchestration",
+    jp: "対話",
+  },
 };
 
 export function Header() {

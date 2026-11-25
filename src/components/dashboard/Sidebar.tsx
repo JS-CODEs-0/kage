@@ -45,6 +45,13 @@ const navigationItems = [
     href: "/dashboard/library",
     exact: false,
   },
+  {
+    num: "06",
+    name: "AI Assistant",
+    jp: "対話",
+    href: "/dashboard/chat",
+    exact: false,
+  },
 ];
 
 export function Sidebar() {
