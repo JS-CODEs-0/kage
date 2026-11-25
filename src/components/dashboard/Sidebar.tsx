@@ -52,6 +52,13 @@ const navigationItems = [
     href: "/dashboard/chat",
     exact: false,
   },
+  {
+    num: "07",
+    name: "Viral Predictor",
+    jp: "兆",
+    href: "/dashboard/predictor",
+    exact: false,
+  },
 ];
 
 export function Sidebar() {

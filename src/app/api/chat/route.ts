@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getNemotronApiKey } from "@/lib/nemotron";
 
 export const maxDuration = 60; // Allow up to 60 seconds for streaming LLM generation
 
@@ -18,15 +19,17 @@ interface MessageInput {
 
 export async function POST(req: NextRequest) {
   try {
-    const apiKey = process.env.NEMOTRON_API_KEY;
+    const body = await req.json().catch(() => ({}));
+    const apiKey = getNemotronApiKey(req, body.apiKey);
     if (!apiKey) {
       return NextResponse.json(
-        { error: "NEMOTRON_API_KEY is not configured on the server." },
+        { 
+          error: "NEMOTRON_API_KEY is not configured on the server.",
+          help: "Configure NEMOTRON_API_KEY in .env.local, set it in Vercel project settings, or supply it via Settings in the application."
+        },
         { status: 500 }
       );
     }
-
-    const body = await req.json();
     const { messages, brandProfile } = body as {
       messages: MessageInput[];
       brandProfile?: BrandProfileInput;

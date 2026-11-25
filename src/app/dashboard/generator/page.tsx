@@ -13,6 +13,8 @@ import {
   ExternalLink,
 } from "lucide-react";
 import type { BrandProfile } from "../brand/page";
+import { getApiHeaders } from "@/lib/client-api";
+import { ApiKeyModal } from "@/components/dashboard/ApiKeyModal";
 
 type ModeType = "captions" | "hashtags" | "ideas" | "reels";
 
@@ -72,6 +74,7 @@ export default function GeneratorPage() {
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [isKeyModalOpen, setIsKeyModalOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -104,7 +107,7 @@ export default function GeneratorPage() {
     try {
       const res = await fetch("/api/generate", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: getApiHeaders(),
         body: JSON.stringify({
           mode: selectedMode,
           topic: topic.trim(),
@@ -281,9 +284,20 @@ export default function GeneratorPage() {
             </div>
 
             {error && (
-              <div className="flex items-start gap-2 p-3 border border-vermilion/40 bg-vermilion/10 text-vermilion text-xs">
-                <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-                <span>{error}</span>
+              <div className="flex items-start justify-between gap-3 p-3 border border-vermilion/40 bg-vermilion/10 text-vermilion text-xs rounded-lg">
+                <div className="flex items-start gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                  <span>{error}</span>
+                </div>
+                {error.includes("NEMOTRON_API_KEY") && (
+                  <button
+                    type="button"
+                    onClick={() => setIsKeyModalOpen(true)}
+                    className="underline hover:text-white font-mono shrink-0 whitespace-nowrap text-[11px]"
+                  >
+                    Set Key →
+                  </button>
+                )}
               </div>
             )}
           </div>
@@ -395,6 +409,14 @@ export default function GeneratorPage() {
           </div>
         </div>
       </div>
+
+      <ApiKeyModal
+        isOpen={isKeyModalOpen}
+        onClose={() => setIsKeyModalOpen(false)}
+        onSaved={() => {
+          setError(null);
+        }}
+      />
     </div>
   );
 }

@@ -7,6 +7,7 @@ import {
   Inbox,
   ArrowUpRight,
   MessageSquare,
+  TrendingUp,
 } from "lucide-react";
 
 export default function DashboardPage() {
@@ -40,6 +41,15 @@ export default function DashboardPage() {
     },
     {
       num: "04",
+      title: "Viral Predictor",
+      jp: "兆",
+      desc: "Pre-flight algorithmic audit, hook strength scoring, and AI content optimization.",
+      href: "/dashboard/predictor",
+      meta: "Predictive Intelligence",
+      icon: TrendingUp,
+    },
+    {
+      num: "05",
       title: "Content Timeline",
       jp: "暦",
       desc: "Schedule releases across platforms and visualize publication velocity.",
@@ -48,7 +58,7 @@ export default function DashboardPage() {
       icon: Calendar,
     },
     {
-      num: "05",
+      num: "06",
       title: "The Archives",
       jp: "蔵",
       desc: "Curated repository of approved social dispatches, scripts, and drafts.",
@@ -95,7 +105,7 @@ export default function DashboardPage() {
         {/* Gate Stats Row (Kage gate-stats pattern) */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 mt-8 border-t border-line-soft">
           <div>
-            <span className="kage-num block text-2xl md:text-3xl">05</span>
+            <span className="kage-num block text-2xl md:text-3xl">06</span>
             <span className="text-[10px] tracking-[0.2em] uppercase text-muted">Active Chambers</span>
           </div>
           <div>
@@ -121,7 +131,7 @@ export default function DashboardPage() {
           <span className="k kage-jp">伽藍</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {chapters.map((chap) => {
             return (
               <Link
@@ -197,6 +207,13 @@ export default function DashboardPage() {
             >
               <Sparkles className="w-3.5 h-3.5 text-vermilion" />
               <span>Synthesize Dispatch</span>
+            </Link>
+            <Link
+              href="/dashboard/predictor"
+              className="kage-cta text-[10px] tracking-[0.22em]"
+            >
+              <TrendingUp className="w-3.5 h-3.5 text-vermilion" />
+              <span>Audit Virality</span>
             </Link>
             <Link
               href="/dashboard/chat"

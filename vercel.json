@@ -5,6 +5,9 @@
     },
     "src/app/api/chat/route.ts": {
       "maxDuration": 60
+    },
+    "src/app/api/viral-predictor/route.ts": {
+      "maxDuration": 60
     }
   }
 }
